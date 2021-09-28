@@ -32,5 +32,17 @@ Differentiators from previous efforts to produce a similar model include:
 - Using a larger and more varied training dataset
 - Using different aggregation methods (FedMA, FedPer)
 
+## Tentative Timeline
+1. Welcome & Problem Definition
+2. Intro to ML
+3. Sequence Models
+4. Sequence Models II / Federated Learning
+5. Federated Learning II
+6. Data Sourcing & Prep
+7. Data Prep II/Training
+8. Model Pruning / Federation
+9. Poster / Presentation Work
+10. Poster Work II / Presentation Practice
+
 ## Contributors
 - Will be updated soon
