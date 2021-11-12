@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Web Demo</title>
+
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+
+    main{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    body, textarea {
+      font-family: 'Roboto', 'Open Sans', sans-serif;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    textarea, #prediction{
+      width: 500px;
+      max-width: 100%;
+    }
+
+    #prediction{
+      display: flex;
+    }
+
+    #prediction button{
+      width: 33.33333333%;
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <h1>Mobile Keyboard Demo</h1>
+  <textarea disabled="true" id="input"></textarea>
+  <div id="prediction"></div>
+  <div id="loading">Loading keyboard model...</div>
+</main>
+
+<!--<script src="https://unpkg.com/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>-->
+<!--<script src="https://unpkg.com/@tensorflow/tfjs-converter@3.11.0/dist/tf-converter.min.js"></script>-->
+<script src="./pkg/bundle.js"></script>
+</body>
+</html>
