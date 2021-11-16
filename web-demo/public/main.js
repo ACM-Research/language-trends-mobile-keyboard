@@ -1,8 +1,22 @@
 const inputElem = document.querySelector('#input');
 const predictionElem = document.querySelector('#prediction');
 const loadingElem = document.querySelector("#loading");
+const modelsDropdownElem = document.querySelector("#models-dropdown");
 import * as tf from '@tensorflow/tfjs';
 import {loadGraphModel} from '@tensorflow/tfjs-converter';
+
+const modelsNames = "beauty,combined,crypto,gaming,kpop".split(",");
+let model;
+let loadedModels = {};
+
+const getSelectedModel = () => {
+    const value = modelsDropdownElem.value;
+    if(value === "base") {
+        return model;
+    }else{
+        return loadedModels[value];
+    }
+};
 
 (async () => {
     const idxsOfLargestNArrayElems = (arr, n, idxToExclude) => {
@@ -39,7 +53,8 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 
     const MODEL_URL = 'tfjs-model/model.json';
 
-    const model = await loadGraphModel(MODEL_URL);
+    model = await loadGraphModel(MODEL_URL);
+    loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await loadGraphModel(`${name}-model/model.json`)])));
 
     loadingElem.hidden = true;
     inputElem.disabled = false;
@@ -51,7 +66,7 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 
         const tensor = tf.tensor([input]);
 
-        const predicted = await model.executeAsync(tensor);
+        const predicted = await getSelectedModel().executeAsync(tensor);
         const predictedArr = predicted.dataSync();
         // console.log("predictedArr", predictedArr);
         const largest3Words = idxsOfLargestNArrayElems(predictedArr, 3, 1);
@@ -95,4 +110,6 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
     };
     inputElem.oninput = checkSuggestions;
     checkSuggestions();
+
+    modelsDropdownElem.onchange = checkSuggestions;
 })();
