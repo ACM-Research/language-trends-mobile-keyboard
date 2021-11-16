@@ -9,6 +9,13 @@
       "package.json",
       "package-lock.json",
       "*.config.js"
-    ]
+    ],
+    "headers": [{
+      "source" : "**/*.@(bin|json)",
+      "headers" : [{
+        "key" : "Cache-Control",
+        "value" : "max-age=31536000"
+      }]
+    }],
   }
 }
