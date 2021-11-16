@@ -5,7 +5,7 @@ const modelsDropdownElem = document.querySelector("#models-dropdown");
 import * as tf from '@tensorflow/tfjs';
 import {loadGraphModel} from '@tensorflow/tfjs-converter';
 
-const modelsNames = "beauty,combined,crypto,gaming,kpop".split(",");
+const modelsNames = "beauty,combined,crypto,gaming,kpop,tech".split(",");
 let model;
 let loadedModels = {};
 
