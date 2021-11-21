@@ -11,6 +11,7 @@ const load = (async () => {
     console.log(await predictNextWord("i am", loadedModels.base));
 })();
 
+
 express().get("/predictNext", async (req, res) => {
     const modelName = req.query.model;
     const text = req.query.text;
