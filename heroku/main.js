@@ -6,7 +6,7 @@ const express = require('express');
 
 const load = (async () => {
     const basePath = path.resolve(".");
-    loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await tf.loadGraphModel(`file://${basePath}/${name}-model/model.json`)])));
+    loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await tf.loadGraphModel(`file://${basePath}/heroku/${name}-model/model.json`)])));
 
     console.log(await predictNextWord("i am", loadedModels.base));
 })();
