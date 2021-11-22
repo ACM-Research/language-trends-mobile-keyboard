@@ -1,13 +1,13 @@
 const path = require('path');
 const fs = require('fs');
 const tf = require("@tensorflow/tfjs-node")
-const modelsNames = "base,beauty,combined,crypto,gaming,kpop,tech".split(",");
+const modelsNames = "base,combined,crypto,gaming,kpop,tech".split(",");
 const PORT = process.env.PORT || 5000;
 const express = require('express');
 
 const load = (async () => {
     const basePath = path.resolve(".");
-    console.log(fs.readdirSync(basePath + "/base-model/"));
+    // console.log(fs.readdirSync(basePath + "/base-model/"));
     loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await tf.loadGraphModel(`file://${basePath}/${name}-model/model.json`)])));
 
     console.log(await predictNextWord("i am", loadedModels.base));
