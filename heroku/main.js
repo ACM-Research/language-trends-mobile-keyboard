@@ -7,8 +7,8 @@ const express = require('express');
 
 const load = (async () => {
     const basePath = path.resolve(".");
-    console.log(fs.readdirSync(basePath), fs.readdirSync("/app"));
-    loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await tf.loadGraphModel(`file://${basePath}/heroku/${name}-model/model.json`)])));
+    console.log(fs.readdirSync(basePath + "/base-model/"));
+    loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await tf.loadGraphModel(`file://${basePath}/${name}-model/model.json`)])));
 
     console.log(await predictNextWord("i am", loadedModels.base));
 })();
