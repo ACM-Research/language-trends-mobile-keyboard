@@ -4,6 +4,7 @@ const tf = require("@tensorflow/tfjs-node")
 const modelsNames = "base,combined,crypto,gaming,kpop,tech".split(",");
 const PORT = process.env.PORT || 5000;
 const express = require('express');
+const cors = require('cors');
 
 const load = (async () => {
     const basePath = path.resolve(".");
@@ -14,7 +15,7 @@ const load = (async () => {
 })();
 
 
-express().get("/predictNext", async (req, res) => {
+express().use(cors()).get("/predictNext", async (req, res) => {
     const modelName = req.query.model;
     const text = req.query.text;
 
