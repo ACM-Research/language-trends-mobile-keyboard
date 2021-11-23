@@ -2,80 +2,22 @@ const inputElem = document.querySelector('#input');
 const predictionElem = document.querySelector('#prediction');
 const loadingElem = document.querySelector("#loading");
 const modelsDropdownElem = document.querySelector("#models-dropdown");
-import * as tf from '@tensorflow/tfjs';
-import {loadGraphModel} from '@tensorflow/tfjs-converter';
-
-const modelsNames = "beauty,combined,crypto,gaming,kpop,tech".split(",");
-let model;
-let loadedModels = {};
-
-const getSelectedModel = () => {
-    const value = modelsDropdownElem.value;
-    if(value === "base") {
-        return model;
-    }else{
-        return loadedModels[value];
-    }
-};
 
 (async () => {
-    const idxsOfLargestNArrayElems = (arr, n, idxToExclude) => {
-        const together = Array.from(arr).map((elem, idx) => [elem, idx]);
-
-        const sorted = together.sort((a, b) => b[0] - a[0]);
-
-        const idxs = sorted.map(a => a[1]).filter(idx => idx !== idxToExclude);
-
-        return idxs.slice(0, n);
-    };
-
-    const textToInputTensor = (text, seqLength = 4) => {
-        const returnVal = new Array(seqLength);
-        returnVal.fill(0);
-
-        // :(
-        const words = text.replaceAll(".", "").replaceAll(",", "").replaceAll("!", "").replaceAll("?", "").split(" ");
-
-        const wordsMappedToNums = words.map(word => tokenizerJson[word] || 1);// 1 for OOV
-
-        return returnVal.map((defaultVal, idx) => {
-            const pos = wordsMappedToNums.length - idx - 1;
-            const val = wordsMappedToNums[pos];
-            if(val > 49999){
-                return defaultVal;
-            }
-            return val || defaultVal;
-        }).reverse();
-    };
-
-    const tokenizerJson = await fetch("./tokenizer-idx.json").then(x=>x.json());
-    const tokenizerJsonReversed = Object.fromEntries(Object.entries(tokenizerJson).map(([a, b]) => [b, a]));
-
-    const MODEL_URL = 'tfjs-model/model.json';
-
-    model = await loadGraphModel(MODEL_URL);
-    loadedModels = Object.fromEntries(await Promise.all(modelsNames.map(async name => [name, await loadGraphModel(`${name}-model/model.json`)])));
+    await fetch("https://mobile-keyboard.herokuapp.com/");
 
     loadingElem.hidden = true;
     inputElem.disabled = false;
 
-    // console.log(textToInputTensor();
-
     const predictNextWord = async text => {
-        const input = textToInputTensor(text);
+        const selectedModel = modelsDropdownElem.value;
 
-        const tensor = tf.tensor([input]);
+        const url = `https://mobile-keyboard.herokuapp.com/predictNext?model=${selectedModel}&text=${encodeURIComponent(text)}`;
 
-        const predicted = await getSelectedModel().executeAsync(tensor);
-        const predictedArr = predicted.dataSync();
-        // console.log("predictedArr", predictedArr);
-        const largest3Words = idxsOfLargestNArrayElems(predictedArr, 3, 1);
+        const result = await fetch(url);
+        const data = await result.json();
 
-        // const max = predicted.argMax(1).dataSync()[0];
-        // console.log(predicted, max);
-        // const word = tokenizerJsonReversed[max];
-
-        return largest3Words.map(num => tokenizerJsonReversed[num]);
+        return data.predicted;
     };
 
     let lastUpdate = Date.now();
@@ -109,7 +51,7 @@ const getSelectedModel = () => {
         }
     };
     inputElem.oninput = checkSuggestions;
-    checkSuggestions();
-
     modelsDropdownElem.onchange = checkSuggestions;
+
+    await checkSuggestions();
 })();
