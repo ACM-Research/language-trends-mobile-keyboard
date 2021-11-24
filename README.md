@@ -4,15 +4,15 @@
 
 ![](https://raw.githubusercontent.com/ACM-Research/federated-learning-mobile-keyboard/master/Federated_Learning_of_a_Mobile_Keyboard_Next_Word_Prediction_Model.png)
 
-Table of Contents
-Table of Contents
-Abstract
-Background
-Data Collection
-Model
-Results
-Web Demo
-Contributors
+## Table of Contents
+- Table of Contents
+- Abstract
+- Background
+- Data Collection
+- Model
+- Results
+- Web Demo
+- Contributors
 
 ## Abstract
 The advent of smartphones and the Internet has brought together a variety of communities and like-minded individuals. This has resulted in the creation of many different subcultures and the emergence of corresponding language patterns. By observing the linguistic diversity of Twitter users, we aim to analyze the language patterns of different groups of people and communities through a mobile keyboard next-word prediction model.
@@ -35,10 +35,10 @@ We found the optimal model structure and hyperparameter values through hyperpara
 ## Results
 Pictured is a prediction tree given the initial text of "computer". To generate this tree, we refined our base model (initially trained on the base Twitter dataset) by training it on all the tweets from every subtopic. Our goal was to see how well the model would retain computer-related vocabulary knowledge given a prompt related to the tech subtopic. We take the three most "likely" next words as predicted by the model, and for each of those predict three more, etc.
 
-// first tree diagram
+![](https://raw.githubusercontent.com/ACM-Research/federated-learning-mobile-keyboard/master/computer%20-%20combined.png)  
 Highlighted is everything related to technology. It is important to note the model's ability to retain context and information about the subject several words later, showcasing the power of LSTM models.
 
-// second tree diagram
+![](https://raw.githubusercontent.com/ACM-Research/federated-learning-mobile-keyboard/master/investing%20in%20-%20crypto.png)  
  Pictured below is a prediction tree given the initial text of "investing in". To generate this tree, we refined the base model by training it on the crypto subgroup data. Highlighted is everything related to crypto.
 
 ## Web Demo
