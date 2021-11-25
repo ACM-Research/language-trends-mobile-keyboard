@@ -45,10 +45,10 @@ Highlighted is everything related to technology. It is important to note the mod
 Try out the model yourself at [mobilekeyboard.web.app](https://mobilekeyboard.web.app/)
 
 ## Contributors
-- Roman Hauksson-Neill
-- Max Hogan
-- Anh Nguyen
-- Megan Vu
-- Aditya Rathod - Research Lead
+- [Roman Hauksson-Neill](https://github.com/RomanHN)
+- [Max Hogan](https://github.com/realprogrammer5000)
+- [Anh Nguyen](https://github.com/koisaai)
+- [Megan Vu](https://github.com/MeganVu)
+- [Aditya Rathod](https://github.com/adityarathod) - Research Lead
 - Dr. Vincent Ng - Faculty Advisor
 
