@@ -28,6 +28,7 @@ const modelsDropdownElem = document.querySelector("#models-dropdown");
         if(text.endsWith(" ") || text.length === 0){
             predictionElem.innerHTML = "";
             const words = await predictNextWord(text.trim());
+            predictionElem.innerHTML = "";
 
             // best word should be in the middle
             const temp = words[0];
