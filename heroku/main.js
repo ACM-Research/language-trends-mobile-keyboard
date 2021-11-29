@@ -72,7 +72,7 @@ let loadedModels;
 
 const predictNextWord = async (text, model) => {
     const input = textToInputTensor(text);
-    console.log(input);
+    console.log("performing inference on", input);
 
     const tensor = tf.tensor([input]);
 
