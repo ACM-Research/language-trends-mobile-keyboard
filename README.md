@@ -1,4 +1,4 @@
-# Federated Learning of a Mobile Keyboard Next-Word Prediction Model
+# Analysis of Language Trends with a Next-Word Prediction Model
 
 **ACM Research, Fall 2021**
 
